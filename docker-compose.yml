@@ -1,0 +1,25 @@
+version: '3.4'
+name: 'test-compose'
+services:
+  api:
+    image: api
+    container_name: api
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - F:/admin/PycharmProjects/pictet/test-image/app:/app/
+  db:
+    image: "postgres"
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    restart: always
